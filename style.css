@@ -3,3 +3,28 @@
 	width: 640px;
 	margin: 0 auto;
 }
+
+h1 {
+	color: blue;
+	font-family: arial, sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+p {
+	color: green;
+	font-family: tahoma;
+}
+button {
+	padding: 11px;
+    margin: 10px;
+    background-color: black;
+    color: yellow;
+    border: 0;
+    font-size: 13px
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}
