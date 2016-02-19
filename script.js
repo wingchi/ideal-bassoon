@@ -13,5 +13,8 @@ $.ajax({
   method: "GET",
   headers: parseHeaders
 }).done( function(data){
-  $('#wrapper').text(JSON.stringify(data));
+  $('.wrapper').text(JSON.stringify(data));
+
 });
+
+
