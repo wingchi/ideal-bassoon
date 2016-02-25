@@ -17,38 +17,49 @@ $.ajax({
   // $('.wrapper').text(JSON.stringify(data));
   jsonData = data.results;
 
+  console.log(jsonData);
+
   var title = jsonData[0].Title;
   var content = jsonData[0].Contents;
+  var score = jsonData[0].Score;
 
 	$('.header').text(title);
 	$('.story').text(content);
+  $('.score-var').text(score);
 });
 
 $('#button1').click(function() {
 	// console.log(jsonData);
   var title = jsonData[1].Title;
   var content = jsonData[1].Contents;
+    var score = jsonData[1].Score;
+
 
 	$('.header').text(title);
 	$('.story').text(content);
+  $('.score-var').text(score);
 });
 
 $('#button2').click(function() {
 	// console.log(jsonData);
   var title = jsonData[2].Title;
   var content = jsonData[2].Contents;
+  var score = jsonData[2].Score;
 
 	$('.header').text(title);
 	$('.story').text(content);
+  $('.score-var').text(score);
 });
 
 $('#button3').click(function() {
 	// console.log(jsonData);
   var title = jsonData[3].Title;
   var content = jsonData[3].Contents;
+  var score = jsonData[3].Score;
 
 	$('.header').text(title);
 	$('.story').text(content);
+  $('.score-var').text(score);
 });
 
 

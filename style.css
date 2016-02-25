@@ -10,10 +10,14 @@ h1 {
 	font-size: 30px;
 	font-weight: bold;
 	text-transform: uppercase;
+	float: left;
+	width: 66.66%;
 }
 p {
 	color: green;
 	font-family: tahoma;
+	width: 66.66%;
+
 }
 button {
 	padding: 11px;
@@ -21,10 +25,18 @@ button {
     background-color: black;
     color: yellow;
     border: 0;
-    font-size: 13px
+    font-size: 13px;
+   
 }
 
 button:hover {
     background-color: white;
     color: black;
+}
+
+h2  {
+	font-family: arial, sans-serif;
+	float: right;
+	width: 33.33%;
+	font-size: 15px;
 }
