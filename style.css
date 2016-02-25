@@ -16,9 +16,10 @@ h1 {
 p {
 	color: green;
 	font-family: tahoma;
-	width: 66.66%;
+	float: left;
 
 }
+
 button {
 	padding: 11px;
     margin: 10px;
@@ -26,12 +27,15 @@ button {
     color: yellow;
     border: 0;
     font-size: 13px;
+    float: left;
    
 }
 
+
+
 button:hover {
-    background-color: white;
-    color: black;
+    background-color: gray;
+    color: yellow;
 }
 
 h2  {
@@ -39,4 +43,6 @@ h2  {
 	float: right;
 	width: 33.33%;
 	font-size: 15px;
+	color: blue;
+	padding: 15px 0px 0px 0px;
 }
