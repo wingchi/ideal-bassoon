@@ -63,4 +63,78 @@ $('#button3').click(function() {
 });
 
 
+//SCORE KEEPING
+//Beginning score
+var currentScore = 0;
+var prevScore = 0;
 
+// S: This is the chapter ID for the first chapter
+// later on we'll update this variable as we move to different chapters
+var currentChapterId = "J9fasWfZNS";
+
+function getCurrentScoreForChapter(chapterId) {
+  $.ajax({
+    url: "https://api.parse.com/1/classes/Chapter/" + chapterId,
+    method: "GET",
+    headers: parseHeaders
+  }).done(function(chapterData) {
+    currentScore = chapterData.Score;
+    console.log("after: " + currentScore);
+    $("#show-score").text(currentScore);
+  });
+
+  // S: if we failed to pull data back assume that the update failed
+  // and return the previous score
+  // return prevScore;
+}
+
+function updateScoreForChapter(chapterId, newScore) {
+  var newScoreObject = {
+    "Score": newScore
+};
+
+  $.ajax({
+    url: "https://api.parse.com/1/classes/Chapter/" + chapterId,
+    method: "PUT",
+    headers: parseHeaders,
+    data: JSON.stringify(newScoreObject),
+    success: function(data) {
+      // S: once the update is complete, we want to reach out
+      // to our back to confirm that the data was updated
+      // correctly, then update the value on our frontend
+      getCurrentScoreForChapter(chapterId);
+    }
+  });
+}
+
+$('#up-button').click(function() {
+  prevScore = parseInt(currentScore);
+  //adds 1 to current score
+  currentScore = parseInt(currentScore) + 1;
+  console.log("before: " + currentScore);
+  // S: shows current score unless our backend tells us otherwise
+  // this is known as latency compensation, look it up
+  // S: html ids should be - separated, not camel case
+  $("#show-score").text(currentScore);
+  // S: update the current score for the first chapter 
+  // this function will also update the score from the backend
+  updateScoreForChapter(currentChapterId, currentScore);
+});
+
+$('#down-button').click(function() {
+  //checks that current-score is greater than 0
+  if (currentScore > 0) {
+    prevScore = parseInt(currentScore);
+    //subtracts 1 to current score
+    currentScore = parseInt(currentScore) - 1;
+    console.log("before: " + currentScore);
+ 
+  } else {
+    //if current score is 0, it stays at 0 and doesn't go negative
+    return currentScore;
+  }
+  //shows current score
+  $("#show-score").text(currentScore);
+  //updates score to the back end
+  updateScoreForChapter(currentChapterId, currentScore);
+});
