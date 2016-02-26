@@ -7,6 +7,10 @@ var parseHeaders = {
 };
 
 var jsonData = {};
+var currentChapterId = "";
+
+var currentScore = 0;
+var prevScore = 0;
 
 //This code gets from Parse
 $.ajax({
@@ -21,56 +25,62 @@ $.ajax({
 
   var title = jsonData[0].Title;
   var content = jsonData[0].Contents;
-  var score = jsonData[0].Score;
+  currentScore = jsonData[0].Score;
 
 	$('.header').text(title);
 	$('.story').text(content);
-  $('.score-var').text(score);
+  $('.score-var').text(currentScore);
+
+  currentChapterId = jsonData[0].objectId;
 });
 
 $('#button1').click(function() {
 	// console.log(jsonData);
   var title = jsonData[1].Title;
   var content = jsonData[1].Contents;
-    var score = jsonData[1].Score;
+  currentScore = jsonData[1].Score;
 
 
 	$('.header').text(title);
 	$('.story').text(content);
-  $('.score-var').text(score);
+  $('.score-var').text(currentScore);
+
+  currentChapterId = jsonData[1].objectId;
+
 });
 
 $('#button2').click(function() {
 	// console.log(jsonData);
   var title = jsonData[2].Title;
   var content = jsonData[2].Contents;
-  var score = jsonData[2].Score;
+  currentScore = jsonData[2].Score;
 
 	$('.header').text(title);
 	$('.story').text(content);
-  $('.score-var').text(score);
+  $('.score-var').text(currentScore);
+
+  currentChapterId = jsonData[2].objectId;
 });
 
 $('#button3').click(function() {
 	// console.log(jsonData);
   var title = jsonData[3].Title;
   var content = jsonData[3].Contents;
-  var score = jsonData[3].Score;
+  currentScore = jsonData[3].Score;
 
 	$('.header').text(title);
 	$('.story').text(content);
-  $('.score-var').text(score);
+  $('.score-var').text(currentScore);
+
+  currentChapterId = jsonData[3].objectId;
 });
 
 
 //SCORE KEEPING
 //Beginning score
-var currentScore = 0;
-var prevScore = 0;
 
-// S: This is the chapter ID for the first chapter
-// later on we'll update this variable as we move to different chapters
-var currentChapterId = "J9fasWfZNS";
+
+
 
 function getCurrentScoreForChapter(chapterId) {
   $.ajax({
