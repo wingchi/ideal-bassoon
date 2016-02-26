@@ -75,6 +75,10 @@ $('#button3').click(function() {
   currentChapterId = jsonData[3].objectId;
 });
 
+//buttons
+// 2. Generate buttons - pull down array of next chapter given current chapter
+// generate the button  hard code in an ID and hard code the data to simulate it.
+// then call to parse with API and parse api. I a GET to get a sense for what’s there.
 
 //SCORE KEEPING
 //Beginning score
@@ -126,7 +130,7 @@ $('#up-button').click(function() {
   // this is known as latency compensation, look it up
   // S: html ids should be - separated, not camel case
   $("#show-score").text(currentScore);
-  // S: update the current score for the first chapter 
+  // S: update the current score for the first chapter
   // this function will also update the score from the backend
   updateScoreForChapter(currentChapterId, currentScore);
 });
@@ -138,7 +142,7 @@ $('#down-button').click(function() {
     //subtracts 1 to current score
     currentScore = parseInt(currentScore) - 1;
     console.log("before: " + currentScore);
- 
+
   } else {
     //if current score is 0, it stays at 0 and doesn't go negative
     return currentScore;
@@ -147,4 +151,5 @@ $('#down-button').click(function() {
   $("#show-score").text(currentScore);
   //updates score to the back end
   updateScoreForChapter(currentChapterId, currentScore);
+
 });
