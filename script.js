@@ -12,6 +12,8 @@ var currentChapterId = "";
 var currentScore = 0;
 var prevScore = 0;
 
+var currentScores = {};
+
 //This code gets from Parse
 
 $.ajax({
@@ -42,10 +44,22 @@ $.ajax({
             headers: parseHeaders
         }).done(function(chapterData) {
           // alert(chapterData);
-            $('#button-container').append('<button id="button-' + chapterData.objectId + '" class="btn">' + chapterData.Prompt + '</button>');
+            $('#button-container').append('<button id="button-' + chapterData.objectId + '" class="btn prompt-btn" data-target-id=' + chapterData.objectId + '>' + chapterData.Prompt + '</button>');
+            currentScores[chapterData.objectId] = chapterData.Score;
         });
     }
+
+
 });
+
+$("#button-container").on("click", "button", function(){
+        // S: I set the data-target-id attribute of the button when the page loads
+        // now any button you generate will request the right chatper
+        var chapterId = $(this).data("target-id");
+        getChapterAndUpdateUI(chapterId);
+        currentScore = currentScores[chapterId];
+        $('.score-var').text(currentScore);
+    });
 
 //Load data when page loads
 //Get first result from json data
@@ -141,6 +155,21 @@ function updateScoreForChapter(chapterId, newScore) {
             getCurrentScoreForChapter(chapterId);
         }
     });
+}
+
+// S: This is a function that gets the chapter from the backend
+// and upates the frontend
+function getChapterAndUpdateUI(chapterId) {
+  //Parse get request for one object
+  $.ajax({
+    url: "https://api.parse.com/1/classes/Chapter/" + chapterId,
+    method: "GET",
+    headers: parseHeaders
+  }).done( function(data){
+    //sets chapter title and contents with parse info
+    $('#chapter-title').text(JSON.stringify(data.Title));
+    $('#chapter-content').text(JSON.stringify(data.Contents));
+  } );
 }
 
 $('#up-button').click(function() {
